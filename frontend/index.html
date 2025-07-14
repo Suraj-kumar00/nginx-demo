@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello from Nginx Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #e0e0e0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(30, 30, 45, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .info {
+            background: linear-gradient(135deg, #2a2a4a 0%, #1e1e3a 100%);
+            border-left: 4px solid #4facfe;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info strong {
+            color: #4facfe;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            color: #c0c0c0;
+            padding-left: 10px;
+        }
+        
+        .info-item::before {
+            content: "•";
+            color: #4facfe;
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+        
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        button {
+            padding: 14px 24px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: #1a1a2e;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .response {
+            background: rgba(20, 20, 30, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            min-height: 150px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+            overflow-x: auto;
+            color: #e0e0e0;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .endpoints-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .endpoints-title {
+            color: #4facfe;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .endpoint-item {
+            display: flex;
+            flex-direction: column;
+            margin: 10px 0;
+            padding: 8px 0;
+        }
+        
+        .endpoint-path {
+            color: #00f2fe;
+            font-weight: 600;
+            font-family: monospace;
+            margin-bottom: 2px;
+        }
+        
+        .endpoint-desc {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            padding-left: 10px;
+        }
+        
+        .loading {
+            color: #4facfe;
+            font-weight: 600;
+        }
+        
+        .error {
+            color: #ff6b6b;
+        }
+        
+        .success {
+            color: #51cf66;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+            
+            button {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Hello from Nginx Demo!</h1>
+        
+        <div class="info">
+            <strong>What this demonstrates:</strong>
+            <div class="info-item">Nginx as a reverse proxy</div>
+            <div class="info-item">Static file serving</div>
+            <div class="info-item">API endpoint routing</div>
+            <div class="info-item">Basic security headers</div>
+            <div class="info-item">Cache control</div>
+        </div>
+        
+        <div class="button-group">
+            <button onclick="testEndpoint('/api/hello')">Test Hello</button>
+            <button onclick="testEndpoint('/api/time')">Test Time</button>
+            <button onclick="testEndpoint('/api/status')">Test Status</button>
+            <button onclick="testEndpoint('/health')">Nginx Health</button>
+        </div>
+        
+        <div class="response" id="response">
+            Click a button above to test the endpoints!
+            
+            <div class="endpoints-section">
+                <div class="endpoints-title">Available endpoints:</div>
+                <div class="endpoint-item">
+                    <div class="endpoint-path">/api/hello</div>
+                    <div class="endpoint-desc">Simple hello message</div>
+                </div>
+                <div class="endpoint-item">
+                    <div class="endpoint-path">/api/time</div>
+                    <div class="endpoint-desc">Current server time</div>
+                </div>
+                <div class="endpoint-item">
+                    <div class="endpoint-path">/api/status</div>
+                    <div class="endpoint-desc">Service status</div>
+                </div>
+                <div class="endpoint-item">
+                    <div class="endpoint-path">/health</div>
+                    <div class="endpoint-desc">Nginx health check</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function testEndpoint(endpoint) {
+            const responseDiv = document.getElementById('response');
+            responseDiv.innerHTML = '<span class="loading">Loading...</span>';
+            
+            try {
+                const response = await fetch(endpoint);
+                const data = await response.text();
+                
+                const statusClass = response.ok ? 'success' : 'error';
+                const statusText = response.ok ? 'SUCCESS' : 'ERROR';
+                
+                responseDiv.innerHTML = `
+                    <div class="${statusClass}">Status: ${response.status} - ${statusText}</div>
+                    <div style="margin: 10px 0;">Endpoint: <span style="color: #00f2fe;">${endpoint}</span></div>
+                    <div style="margin: 10px 0;">Response:</div>
+                    <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 3px solid #4facfe;">${data}</div>
+                `;
+                
+            } catch (error) {
+                responseDiv.innerHTML = `
+                    <div class="error">Error testing ${endpoint}:</div>
+                    <div style="background: rgba(255, 107, 107, 0.1); padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 3px solid #ff6b6b;">${error.message}</div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
