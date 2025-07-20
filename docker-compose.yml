@@ -1,31 +1,66 @@
-version: '3.8'
-
 services:
   nginx:
     image: nginx:alpine
     container_name: nginx-demo
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
       - ./frontend:/usr/share/nginx/html/frontend:ro
+      - nginx_cache:/var/cache/nginx
+      - nginx_logs:/var/log/nginx
     depends_on:
-      - backend
+      - primary-server
+      - secondary-server
+      - tertiary-server
     networks:
       - app-network
+    restart: unless-stopped
 
-  backend:
-    image: node:18-alpine
-    container_name: backend-service
-    command: node app.js
-    working_dir: /app
-    volumes:
-      - ./backend:/app
-    ports:
-      - "3000:3000"
+  primary-server:
+    build: ./backend/primary
+    container_name: primary-server
+    environment:
+      - SERVER_ID=primary
+      - PORT=3001
+    expose:
+      - "3001"
     networks:
       - app-network
+    restart: unless-stopped
+
+  secondary-server:
+    build: ./backend/secondary
+    container_name: secondary-server
+    environment:
+      - SERVER_ID=secondary
+      - PORT=3002
+    expose:
+      - "3002"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  tertiary-server:
+    build: ./backend/tertiary
+    container_name: tertiary-server
+    environment:
+      - SERVER_ID=tertiary
+      - PORT=3003
+    expose:
+      - "3003"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+volumes:
+  nginx_cache:
+    driver: local
+  nginx_logs:
+    driver: local
 
 networks:
   app-network:
