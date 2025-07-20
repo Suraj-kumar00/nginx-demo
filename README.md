@@ -1,9 +1,9 @@
+Here's your README with all the diagram placeholders added in the optimal locations:
+
 # NGINX Complete Demo Platform
 
-> **From Zero to Production: A Comprehensive, Hands-on NGINX Learning Experience**
+> **From Zero to Production: A Comprehensive, Hands-on NGINX Learning Experience**  
 > Master NGINX through practical examples, real-world scenarios, and interactive demonstrations.
-
----
 
 ## What You'll Learn
 
@@ -13,15 +13,11 @@
 | 🟡 **Intermediate** | [Load Balancing & SSL](#intermediate-production-ready) | Round-robin, weighted balancing, SSL/TLS setup           | ✅ Live load testing    |
 | 🔴 **Advanced**     | [Performance & Security](#advanced-enterprise-level)   | Caching, rate limiting, monitoring, optimization         | ✅ Real-time metrics    |
 
----
-
 ## Prerequisites
 
 * **Docker & Docker Compose** (Latest versions)
 * **Basic Linux CLI** knowledge
 * **Basic understanding** of web servers (helpful but not required)
-
----
 
 ## Quick Start
 
@@ -43,9 +39,10 @@ docker ps
 * 📊 Advanced Dashboard: [http://localhost/frontend/dashboard/](http://localhost/frontend/dashboard/)
 * ❤️ Health Check: [http://localhost/health](http://localhost/health)
 
----
-
 ## Learning Path
+
+### Learning Progression
+![Learning Path Visualization](/Assets/learning-flow-nginx-demo.svg)
 
 ### 🟢 Beginner Fundamentals
 
@@ -61,8 +58,6 @@ docker ps
 * ✅ Test different configuration patterns
 * ✅ Compare static vs dynamic content delivery
 * ✅ Debug proxy connection issues
-
----
 
 ### 🟡 Intermediate Production-Ready
 
@@ -80,8 +75,6 @@ docker ps
 * ✅ Real-time request distribution monitoring
 * ✅ Cache performance comparison
 
----
-
 ### 🔴 Advanced Enterprise-Level
 
 **Enterprise patterns with monitoring and optimization**
@@ -98,9 +91,13 @@ docker ps
 * ✅ Cache hit/miss ratio analysis
 * ✅ Performance benchmarking tools
 
----
-
 ## Project Architecture
+
+### System Overview
+![High-Level System Architecture](/Assets/nginx-demo-architecture1.svg)
+
+### Container Infrastructure
+![Container Architecture Diagram](/Assets/nginx-demo-docker-flow.svg)
 
 ```
 nginx-demo/
@@ -118,7 +115,13 @@ nginx-demo/
     └── Real-time configuration demos
 ```
 
----
+## System Flow & Request Processing
+
+### Request Flow Architecture
+![Request Flow Diagram](/Assets/nignx-demo-request-flow.svg)
+
+### Caching Architecture
+![Caching Flow Diagram](/Assets/nginx-cache-flow.svg)
 
 ## How to Use This Project
 
@@ -137,16 +140,20 @@ Each learning level includes:
 3. Master **Advanced topics** → Enterprise-level expertise
 4. Use **Interactive Demos** → Test everything hands-on
 
----
-
 ## Key Features
 
 ### Live Demonstrations
+
+#### Load Balancing Visualization
+![Load Balancing Visualization](/Assets/nginx-demo-load-balancing.svg)
 
 * **Load Balancing Visualization** – Watch requests distribute across 3 servers
 * **SSL/TLS Testing** – Generate certificates and test HTTPS
 * **Performance Monitoring** – Real-time metrics and dashboards
 * **Security Testing** – Rate limiting and protection mechanisms
+
+### Security Architecture
+![Security Architecture Diagram](/Assets/nginx-demo-security.svg)
 
 ### Production-Ready Patterns
 
@@ -161,8 +168,6 @@ Each learning level includes:
 * **Monitoring Dashboard** – Visualize performance and health
 * **Configuration Examples** – Copy-paste ready configs
 * **Troubleshooting Guides** – Solve common issues quickly
-
----
 
 ## What's Included
 
@@ -188,7 +193,9 @@ Each learning level includes:
 * Performance metrics visualization
 * Configuration demonstration tools
 
----
+## Monitoring & Performance
+
+![Monitoring Architecture Diagram](/Assets/nginx-demo-data-collection-flow.svg)
 
 ## Learning Outcomes
 
@@ -202,8 +209,6 @@ After completing this project, you'll master:
 * ✅ **Production deployment** – Best practices, monitoring, troubleshooting
 * ✅ **Real-world patterns** – Microservices, high availability, scalability
 
----
-
 ## 🙌 Contributing
 
 **Ways to contribute:**
@@ -212,8 +217,6 @@ After completing this project, you'll master:
 * Feature requests – Suggest new learning modules
 * Documentation – Improve explanations and examples
 * Test cases – Add new scenarios and demos
-
----
 
 ## Troubleshooting
 
@@ -237,20 +240,14 @@ docker logs -f nginx-demo
 curl http://localhost/api/hello
 ```
 
----
-
 ## License
 
 This project is licensed under the **[MIT License](/LICENSE)** — learn, modify, and share freely!
-
----
 
 ## 🎉 Acknowledgments
 
 * **NGINX Team** – For the incredible web server
 * **Docker Community** – For containerization best practices
 * **Open Source Contributors** – Making projects like this possible
-
----
 
 **Ready to master NGINX? Start with the [Quick Start](#quick-start) section and begin your journey from zero to hero!**
